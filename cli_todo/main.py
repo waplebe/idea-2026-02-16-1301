@@ -13,5 +13,14 @@ def main():
     for task in args.task:
         print(f"- {task}")
 
+    # Add persistence using a file
+    try:
+        with open("todo.txt", "a") as f:
+            for task in args.task:
+                f.write(task + "\n")
+    except Exception as e:
+        print(f"Error writing to file: {e}")
+
+
 if __name__ == "__main__":
     main()
