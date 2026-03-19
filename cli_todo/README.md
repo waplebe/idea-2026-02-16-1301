@@ -71,3 +71,12 @@ python main.py --remove "Walk the dog"
 # Clear all tasks
 python main.py --clear
 ```
+
+## Improvements
+
+*   **Robust Error Handling:** Added comprehensive `try...except` blocks to handle potential file I/O errors gracefully.  This prevents the script from crashing if the `todo.txt` file is inaccessible or if there are permission issues.
+*   **Non-Existent Task Removal:** Implemented a check to ensure that the task being removed actually exists in the `todo.txt` file. If the task is not found, a message is printed to the console, and the list remains unchanged.
+*   **Empty List Clearing:** Added a test case and logic to handle the scenario where the `todo.txt` file is empty when the `--clear` flag is used.
+*   **Tasks with Spaces:** Added a test case and logic to handle tasks containing spaces.
+*   **Comprehensive Testing:** Added new test cases to cover edge cases such as removing a non-existent task and clearing an empty list.  This ensures that the script behaves correctly in various situations.
+*   **Improved Documentation:** Updated the README file to reflect the new features and improvements.

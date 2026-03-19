@@ -47,5 +47,25 @@ class TestMain(unittest.TestCase):
             tasks = [line.strip() for line in f.readlines()]
         self.assertEqual(tasks, [])
 
+    def test_remove_nonexistent_task(self):
+        main(["task1", "--remove", "task2"])
+        with open("todo.txt", "r") as f:
+            tasks = [line.strip() for line in f.readlines()]
+        self.assertEqual(tasks, ["task1"])
+
+    def test_clear_empty_list(self):
+        with open("todo.txt", "w") as f:
+            f.write("")
+        main(["--clear"])
+        with open("todo.txt", "r") as f:
+            tasks = [line.strip() for line in f.readlines()]
+        self.assertEqual(tasks, [])
+
+    def test_add_task_with_spaces(self):
+        main("Task with spaces")
+        with open("todo.txt", "r") as f:
+            tasks = [line.strip() for line in f.readlines()]
+        self.assertEqual(tasks, ["Task with spaces"])
+
 if __name__ == '__main__':
     unittest.main()
