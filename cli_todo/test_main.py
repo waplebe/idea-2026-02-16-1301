@@ -1,6 +1,6 @@
 import unittest
-from main import main
 import os
+from main import main
 
 class TestMain(unittest.TestCase):
 
@@ -67,5 +67,18 @@ class TestMain(unittest.TestCase):
             tasks = [line.strip() for line in f.readlines()]
         self.assertEqual(tasks, ["Task with spaces"])
 
-if __name__ == '__main__':
-    unittest.main()
+    def test_remove_task_with_spaces(self):
+        main(["Task with spaces", "Task2 with spaces"])
+        with open("todo.txt", "r") as f:
+            tasks = [line.strip() for line in f.readlines()]
+        self.assertEqual(tasks, ["Task2 with spaces"])
+        main(["Task with spaces", "--remove", "Task2 with spaces"])
+        with open("todo.txt", "r") as f:
+            tasks = [line.strip() for line in f.readlines()]
+        self.assertEqual(tasks, ["Task with spaces"])
+
+    def test_add_multiple_tasks_with_spaces(self):
+        main("Task 1 with spaces", "Task 2 with spaces")
+        with open("todo.txt", "r") as f:
+            tasks = [line.strip() for line in f.readlines()]
+        self.assertEqual(tasks, ["Task 1 with spaces", "Task 2 with spaces"])

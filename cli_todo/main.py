@@ -1,4 +1,5 @@
 import argparse
+import os
 
 def main():
     parser = argparse.ArgumentParser(description="A simple command-line todo list.")
@@ -23,6 +24,10 @@ def main():
 
     if args.remove:
         try:
+            if not os.path.exists("todo.txt"):
+                print(f"Task not found: {args.remove}")
+                return
+
             with open("todo.txt", "r") as f:
                 tasks = [line.strip() for line in f.readlines()]
 
